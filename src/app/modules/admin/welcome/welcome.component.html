@@ -1,0 +1,101 @@
+<div class="flex flex-col flex-auto w-full">
+
+    <!-- Header -->
+    <div
+        class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+        <div class="flex-1 min-w-0">
+            <!-- Title -->
+            <div class="mt-2">
+                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                    Bienvenido Administrador de sistema PRTG!
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap w-full bg-gray-800 text-white p-6">
+    
+            <!-- New vs. Returning -->
+            <div class="flex flex-col flex-auto p-6">
+                <div class="flex items-start justify-between">
+                    <div class="text-lg font-medium tracking-tight leading-6 truncate">New vs. Returning</div>
+                    <div class="ml-2">
+                        <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
+                            [matMenuTriggerFor]="conversionMenu">
+                            <span class="font-medium text-sm text-secondary">30 days</span>
+                        </button>
+                        <mat-menu #conversionMenu="matMenu">
+                            <button mat-menu-item>30 days</button>
+                            <button mat-menu-item>3 months</button>
+                            <button mat-menu-item>9 months</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="flex flex-col flex-auto mt-6 h-44">
+                    <apx-chart class="flex flex-auto items-center justify-center w-full h-full"
+                        [chart]="chartNewVsReturning.chart" [colors]="chartNewVsReturning.colors"
+                        [labels]="chartNewVsReturning.labels" [plotOptions]="chartNewVsReturning.plotOptions"
+                        [series]="chartNewVsReturning.series" [states]="chartNewVsReturning.states"
+                        [tooltip]="chartNewVsReturning.tooltip"></apx-chart>
+                </div>
+                <div class="mt-8">
+                    <div class="-my-3 divide-y">
+                        <ng-container *ngFor="let dataset of data.newVsReturning.series; let i = index">
+                            <div class="grid grid-cols-3 py-3">
+                                <div class="flex items-center">
+                                    <div class="flex-0 w-2 h-2 rounded-full"
+                                        [style.backgroundColor]="chartNewVsReturning.colors[i]"></div>
+                                    <div class="ml-3 truncate">{{data.newVsReturning.labels[i]}}</div>
+                                </div>
+                                <div class="font-medium text-right">{{data.newVsReturning.uniqueVisitors * dataset / 100
+                                    |
+                                    number:'1.0-0'}}</div>
+                                <div class="text-right text-secondary">{{dataset}}%</div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col flex-auto  p-6">
+                <div class="flex items-start justify-between">
+                    <div class="text-lg font-medium tracking-tight leading-6 truncate">New vs. Returning</div>
+                    <div class="ml-2">
+                        <button class="h-6 min-h-6 px-2 rounded-full bg-hover" mat-button
+                            [matMenuTriggerFor]="conversionMenu">
+                            <span class="font-medium text-sm text-secondary">30 days</span>
+                        </button>
+                        <mat-menu #conversionMenu="matMenu">
+                            <button mat-menu-item>30 days</button>
+                            <button mat-menu-item>3 months</button>
+                            <button mat-menu-item>9 months</button>
+                        </mat-menu>
+                    </div>
+                </div>
+                <div class="flex flex-col flex-auto mt-6 h-44">
+                    <apx-chart class="flex flex-auto items-center justify-center w-full h-full"
+                        [chart]="chartNewVsReturning.chart" [colors]="chartNewVsReturning.colors"
+                        [labels]="chartNewVsReturning.labels" [plotOptions]="chartNewVsReturning.plotOptions"
+                        [series]="chartNewVsReturning.series" [states]="chartNewVsReturning.states"
+                        [tooltip]="chartNewVsReturning.tooltip"></apx-chart>
+                </div>
+                <div class="mt-8">
+                    <div class="-my-3 divide-y">
+                        <ng-container *ngFor="let dataset of data.newVsReturning.series; let i = index">
+                            <div class="grid grid-cols-3 py-3">
+                                <div class="flex items-center">
+                                    <div class="flex-0 w-2 h-2 rounded-full"
+                                        [style.backgroundColor]="chartNewVsReturning.colors[i]"></div>
+                                    <div class="ml-3 truncate">{{data.newVsReturning.labels[i]}}</div>
+                                </div>
+                                <div class="font-medium text-right">{{data.newVsReturning.uniqueVisitors * dataset / 100
+                                    |
+                                    number:'1.0-0'}}</div>
+                                <div class="text-right text-secondary">{{dataset}}%</div>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+
+    </div>

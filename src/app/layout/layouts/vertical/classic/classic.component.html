@@ -39,10 +39,38 @@
         </button>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
-            <languages></languages>
+            <!-- <languages></languages> -->
+            <button mat-flat-button style="color:white" class="bg-red-500">
+                <div class="font-black pr-3">!!</div>
+                <div>2</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-rose-500">
+                <div class="font-black pr-3">!</div>
+                <div>2</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-yellow-500">
+                <div class="font-black pr-3">W</div>
+                <div>2</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-lime-500">
+                <div class="font-black pr-3"><mat-icon svgIcon="heroicons_solid:check"></mat-icon></div>
+                <div>25</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-blue-500">
+                <div class="font-black pr-3"><mat-icon svgIcon="pause"></mat-icon></div>
+                <div>5</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-orange-500">
+                <div class="font-black pr-3">U</div>
+                <div>3</div>
+            </button>
+            <button mat-flat-button style="color:white" class="bg-zinc-500">
+                <div class="font-black pr-3">?</div>
+                <div>5</div>
+            </button>
             <fuse-fullscreen class="hidden md:block"></fuse-fullscreen>
             <search [appearance]="'bar'"></search>
-            <shortcuts></shortcuts>
+            <!-- <shortcuts></shortcuts>
             <messages></messages>
             <notifications></notifications>
             <button
@@ -50,7 +78,7 @@
                 mat-icon-button
                 (click)="quickChat.toggle()">
                 <mat-icon [svgIcon]="'heroicons_outline:chat-alt-2'"></mat-icon>
-            </button>
+            </button> -->
             <user></user>
         </div>
     </div>
@@ -70,4 +98,4 @@
 </div>
 
 <!-- Quick chat -->
-<quick-chat #quickChat="quickChat"></quick-chat>
+<!-- <quick-chat #quickChat="quickChat"></quick-chat> -->
