@@ -1,0 +1,90 @@
+{
+    "prtg-version": "23.2.83.1760",
+    "treesize": 14,
+    "devices": [
+        {
+            "objid": 40,
+            "groupid": "Sonda local",
+            "device": "Dispositivo de sonda",
+            "host": "127.0.0.1"
+        },
+        {
+            "objid": 42,
+            "groupid": "Infraestructura de red",
+            "device": "DNS: 10.147.112.2",
+            "host": "10.147.112.2"
+        },
+        {
+            "objid": 43,
+            "groupid": "Infraestructura de red",
+            "device": "DNS: 204",
+            "host": "204.189-204-204.bestelclientes.com.mx"
+        },
+        {
+            "objid": 45,
+            "groupid": "Infraestructura de red",
+            "device": "Puerta de enlace/DHCP: 192.168.0.1",
+            "host": "192.168.0.1"
+        },
+        {
+            "objid": 46,
+            "groupid": "Infraestructura de red",
+            "device": "Internet",
+            "host": "www.google.com"
+        },
+        {
+            "objid": 1026,
+            "groupid": "Raíz",
+            "device": "Servidor central de PRTG",
+            "host": ""
+        },
+        {
+            "objid": 2050,
+            "groupid": "Hosts Hyper-V",
+            "device": "DESKTOP-28V1QTH",
+            "host": "DESKTOP-28V1QTH.mshome.net"
+        },
+        {
+            "objid": 2051,
+            "groupid": "Hosts Hyper-V",
+            "device": "192.168.0.15",
+            "host": "192.168.0.15"
+        },
+        {
+            "objid": 2053,
+            "groupid": "Linux / macOS / Unix",
+            "device": "192.168.0.4",
+            "host": "192.168.0.4"
+        },
+        {
+            "objid": 2054,
+            "groupid": "Linux / macOS / Unix",
+            "device": "192.168.0.3",
+            "host": "192.168.0.3"
+        },
+        {
+            "objid": 2055,
+            "groupid": "Linux / macOS / Unix",
+            "device": "192.168.0.14",
+            "host": "192.168.0.14"
+        },
+        {
+            "objid": 2056,
+            "groupid": "Linux / macOS / Unix",
+            "device": "192.168.0.16",
+            "host": "192.168.0.16"
+        },
+        {
+            "objid": 2057,
+            "groupid": "Linux / macOS / Unix",
+            "device": "192.168.0.253",
+            "host": "192.168.0.253"
+        },
+        {
+            "objid": 2066,
+            "groupid": "Subred 192.168.0",
+            "device": "192.168.0.5",
+            "host": "192.168.0.5"
+        }
+    ]
+}

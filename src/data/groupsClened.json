@@ -1,0 +1,78 @@
+{
+    "prtg-version": "23.2.83.1760",
+    "treesize": 18,
+    "groups": [
+        {
+            "objid": 0,
+            "name": "Raíz"
+        },
+        {
+            "objid": 50,
+            "name": "Detección de red"
+        },
+        {
+            "objid": 53,
+            "name": "Infraestructura de red"
+        },
+        {
+            "objid": 54,
+            "name": "Windows"
+        },
+        {
+            "objid": 55,
+            "name": "Linux / macOS / Unix"
+        },
+        {
+            "objid": 56,
+            "name": "Impresoras"
+        },
+        {
+            "objid": 57,
+            "name": "Sistemas virtuales"
+        },
+        {
+            "objid": 58,
+            "name": "VMware"
+        },
+        {
+            "objid": 59,
+            "name": "Hosts VMware"
+        },
+        {
+            "objid": 60,
+            "name": "Servidores VMware vCenter"
+        },
+        {
+            "objid": 61,
+            "name": "Hyper-V"
+        },
+        {
+            "objid": 62,
+            "name": "Hosts Hyper-V"
+        },
+        {
+            "objid": 63,
+            "name": "Máquinas virtuales Hyper-V"
+        },
+        {
+            "objid": 64,
+            "name": "Servidores"
+        },
+        {
+            "objid": 65,
+            "name": "Clientes"
+        },
+        {
+            "objid": 2064,
+            "name": "Dispositivos desconocidos"
+        },
+        {
+            "objid": 2065,
+            "name": "Subred 192.168.0"
+        },
+        {
+            "objid": 2082,
+            "name": "Grupo de prueba"
+        }
+    ]
+}

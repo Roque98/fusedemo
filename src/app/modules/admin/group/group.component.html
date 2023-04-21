@@ -1,0 +1,74 @@
+<div class="flex flex-col flex-auto w-full">
+
+    <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-8">
+        <!-- Title and action buttons -->
+        <div class="flex items-center justify-between w-full">
+            <div>
+                <div class="text-3xl font-semibold tracking-tight leading-8">Analytics dashboard</div>
+                <div class="font-medium tracking-tight text-secondary">Monitor metrics, check reports and review
+                    performance</div>
+            </div>
+            <div class="flex items-center ml-6">
+                <button class="hidden sm:inline-flex" mat-stroked-button>
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:cog'"></mat-icon>
+                    <span class="ml-2">Settings</span>
+                </button>
+                <button class="hidden sm:inline-flex ml-3" mat-flat-button [color]="'primary'">
+                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:save'"></mat-icon>
+                    <span class="ml-2">Export</span>
+                </button>
+
+                <!-- Actions menu (visible on xs) -->
+                <div class="sm:hidden">
+                    <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
+                        <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                    </button>
+                    <mat-menu #actionsMenu="matMenu">
+                        <button mat-menu-item>Export</button>
+                        <button mat-menu-item>Settings</button>
+                    </mat-menu>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full mt-8">
+            <!-- Visitors overview -->
+            <div
+                class="sm:col-span-2 lg:col-span-3 dark flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden p-3">
+                <!-- tree -->
+                <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+                    <!-- This is the tree node template for leaf nodes -->
+                    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node grid grid-cols-1 grid-rows-2" >  
+                        <!-- use a disabled button to provide padding for tree leaf -->
+                        <div>
+                            <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
+                                <mat-icon class="mat-icon-rtl-mirror">
+                                    {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                                </mat-icon>
+                            </button>
+                            {{node.name}} Hijo
+                        </div>
+                        <div class="grid grid-cols-5 ml-10">
+                            <button mat-raised-button color="primary">Primary</button>
+                        </div>
+                    </cdk-nested-tree-node>
+                    <!-- This is the tree node template for expandable nodes -->
+                    <cdk-nested-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node" >
+                        <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
+                            <mat-icon class="mat-icon-rtl-mirror">
+                                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                            </mat-icon>
+                        </button>
+                        {{node.name}}
+                        <div [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+                            <ng-container cdkTreeNodeOutlet></ng-container>
+                        </div>
+                    </cdk-nested-tree-node>
+                </cdk-tree>
+
+            </div>
+        </div>
+    </div>
+</div>

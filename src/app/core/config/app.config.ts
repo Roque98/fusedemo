@@ -34,7 +34,7 @@ export interface AppConfig
  */
 export const appConfig: AppConfig = {
     layout : 'classic',
-    scheme : 'light',
+    scheme : 'dark',
     screens: {
         sm: '600px',
         md: '960px',

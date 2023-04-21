@@ -74,10 +74,14 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            // Dashboards
+            // PRTG
             {
                 path: 'welcome',
                 loadChildren: () => import('app/modules/admin/welcome/welcome.module').then(m => m.WelcomeModule)
+            },
+            {
+                path: 'group',
+                loadChildren: () => import('app/modules/admin/group/group.module').then(m => m.GroupModule)
             },
             // Dashboards
             {
