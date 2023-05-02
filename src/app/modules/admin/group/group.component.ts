@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ArrayDataSource } from '@angular/cdk/collections';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { GroupService } from './group.service';
-import { Group } from './group.type';
+import { Device, Group, exampleData } from './group.type';
 import { Subject, takeUntil } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
@@ -49,25 +49,27 @@ export class GroupComponent implements OnInit {
     private _groupService: GroupService,
     private _activeRoute: ActivatedRoute,
   ) {
-    this._groupService.data$
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((data) => {
-        // log data
-        console.log(data);
-        // Store the data
-        this.dataSource = new ArrayDataSource(data);
-      });
+    // this._groupService.data$
+    //   .pipe(takeUntil(this._unsubscribeAll))
+    //   .subscribe((data) => {
+    //     // log data
+    //     console.log(data);
+    //     // Store the data
+    //     this.dataSource = new ArrayDataSource(data);
+    //   });
 
-    // subscribe _idRoot services
-    this._groupService.idRoot.pipe(takeUntil(this._unsubscribeAll)).subscribe((idRoot) => {
-      this._groupService.getGroupById(idRoot).subscribe((data) => {
-        this._groupService._data.next(data);
-      });
-    });
+    // // subscribe _idRoot services
+    // this._groupService.idRoot.pipe(takeUntil(this._unsubscribeAll)).subscribe((idRoot) => {
+    //   this._groupService.getGroupById(idRoot).subscribe((data) => {
+    //     this._groupService._data.next(data);
+    //   });
+    // });
+
+    this.dataSource = new ArrayDataSource(exampleData);
+    console.log(this.dataSource);
   }
 
   ngOnInit(): void {
 
   }
-
 }

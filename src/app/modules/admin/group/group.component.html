@@ -40,7 +40,7 @@
                 <!-- tree -->
                 <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
                     <!-- This is the tree node template for leaf nodes -->
-                    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node grid grid-cols-1 grid-rows-2" >  
+                    <cdk-nested-tree-node *cdkTreeNodeDef="let node" class="example-tree-node" >  
                         <!-- use a disabled button to provide padding for tree leaf -->
                         <div>
                             <button mat-icon-button [attr.aria-label]="'Toggle ' + node.name" cdkTreeNodeToggle>
@@ -48,10 +48,13 @@
                                     {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
                                 </mat-icon>
                             </button>
-                            {{node.name}} Hijo
+                            {{node.name}}
                         </div>
-                        <div class="grid grid-cols-5 ml-10">
-                            <button mat-raised-button color="primary">Primary</button>
+                        <div class="" *ngIf="treeControl.isExpanded(node)">
+                            <div *ngFor="let device of node.devices">
+                                {{device.host }}
+                                {{ device.device }}
+                            </div>
                         </div>
                     </cdk-nested-tree-node>
                     <!-- This is the tree node template for expandable nodes -->
