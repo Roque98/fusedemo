@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Input, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { FormulariosRoutingModule } from './formularios-routing.module';
@@ -18,12 +18,14 @@ import { FuseHighlightModule } from '@fuse/components/highlight';
 import { SharedModule } from 'app/shared/shared.module';
 import { DatePickerComponent } from './componentes/date-picker/date-picker.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { InputComponent } from './componentes/input/input.component';
 
 
 @NgModule({
   declarations: [
     FormulariosComponent,
-    DatePickerComponent
+    DatePickerComponent,
+    InputComponent
   ],
   imports: [
     CommonModule,

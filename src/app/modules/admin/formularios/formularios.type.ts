@@ -57,7 +57,7 @@ export interface FormularioGrupo {
 export interface FormularioComponentesHtmlInput {
     id: number;
     tipoInput: number;
-    nombreInput: string;
+    nombrePropiedad: string;
     idInput: string;
     claseInput: string;
     valorInput: string;
@@ -71,10 +71,11 @@ export interface FormularioComponentesHtmlInput {
     readonlyInput: boolean;
     disabledInput: boolean;
     sizeInput: number;
-    multipleInput: boolean;
     idGroup: number;
     order: number;
     textoAyuda: string;
+    etiquetaInput: string;
+    iconoNombre: string;
 }
 
 export interface NombreInputValor {
@@ -91,7 +92,7 @@ export function getFormValuesGroup(formulario: Formulario, idGroup: number): Nom
     formulario.grupos.forEach(grupo => {
         if (grupo.id === idGroup) {
             grupo.componentes.forEach(input => {
-                obj.push({ nombreInput: input.nombreInput, valorInput: input.valorInput });
+                obj.push({ nombreInput: input.nombrePropiedad, valorInput: input.valorInput });
             });
         }
     });
