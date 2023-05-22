@@ -83,6 +83,10 @@ export const appRoutes: Route[] = [
                 path: 'group',
                 loadChildren: () => import('app/modules/admin/group/group.module').then(m => m.GroupModule)
             },
+            {
+                path: 'formulario/:id',
+                loadChildren: () => import('app/modules/admin/formularios/formularios.module').then(m => m.FormulariosModule)
+            },
             // Dashboards
             {
                 path: 'dashboards', children: [

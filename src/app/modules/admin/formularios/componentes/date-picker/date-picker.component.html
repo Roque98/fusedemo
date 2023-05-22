@@ -1,0 +1,11 @@
+<div class="flex items-center" *ngIf="formularioComponentesHtmlInput">
+    <button mat-mini-fab color="primary" class="m-2" [matTooltip]="formularioComponentesHtmlInput.textoAyuda">
+        <mat-icon svgIcon="heroicons_outline:question-mark-circle"></mat-icon>
+    </button>
+    <mat-form-field [ngClass]="" class="flex-auto w-full" >
+        <mat-label>{{formularioComponentesHtmlInput.nombreInput}}</mat-label>
+        <input matInput [matDatepicker]="picker2" [placeholder]="'Choose a date'" [value]="this.formularioComponentesHtmlInput.valorInput">
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+</div>
