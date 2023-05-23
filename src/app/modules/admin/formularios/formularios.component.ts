@@ -32,6 +32,7 @@ export class FormulariosComponent implements OnInit {
             .subscribe((response) => {
               this.data = response;
               this.formGroup = this.construirFormGroup(response);
+              this.formGroup.clearValidators(); 
               this.cargando = false;
               console.log(this.data);
               console.log(this.formGroup);
@@ -70,8 +71,15 @@ export class FormulariosComponent implements OnInit {
         formControl.setValue(input.valorInput);
         
         const validators:ValidatorFn[] = [];
+        
+        // Validacion input requerido
         if(input.requeridoInput){
           validators.push(Validators.required);
+        }
+
+        // Validacion pattern
+        if(input.patronInput){
+          validators.push(Validators.pattern(input.patronInput));
         }
 
         formControl.setValidators(validators);
@@ -104,7 +112,7 @@ export class FormulariosComponent implements OnInit {
       return 'Valor maximo';
     }
     if (formControl.hasError('pattern')) {
-      return 'Patron invalido';
+      return this.getMensajeErrorPatrinInput(formControlName);
     }
     return '';
   }
@@ -113,5 +121,18 @@ export class FormulariosComponent implements OnInit {
   getInvalid(formControlName: string): boolean {
     const formControl = this.formGroup.get(formControlName);
     return formControl.invalid;
+  }
+
+  // Obtner si el formularios es invalido
+  getFormInvalid(): boolean {
+    return this.formGroup.invalid;
+  }
+
+  // Obtener la propiedad mensajeErrorPatrinInput del objeto data
+  // Se debe buscar el componente en todos los grupos del formulario
+  getMensajeErrorPatrinInput(nombrePropiedad: string): string {
+    const componentes = this.data.grupos.map(grupo => grupo.componentes);
+    const input = componentes.find(componente => componente.find(input => input.nombrePropiedad === nombrePropiedad));
+    return input[0].mensajeErrorPatrinInput || '';
   }
 }

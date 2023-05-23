@@ -64,6 +64,7 @@ export interface FormularioComponentesHtmlInput {
     placeholderInput: string;
     requeridoInput: boolean;
     patronInput: string;
+    mensajeErrorPatrinInput: string;
     minInput: string;
     maxInput: string;
     stepInput: string;

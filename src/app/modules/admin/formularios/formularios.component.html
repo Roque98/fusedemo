@@ -12,14 +12,14 @@
                     <mat-icon class="icon-size-5" [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
                     <span class="ml-2">Regresar</span>
                 </button>
-                <button class="hidden sm:inline-flex" mat-stroked-button color="primary" type="submit">
+                <button class="hidden sm:inline-flex" color="primary" type="submit" mat-flat-button [disabled]="getFormInvalid()"> 
                     <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
                     <span class="ml-2">Enviar formulario</span>
                 </button>
 
                 <!-- Actions menu (visible on xs) -->
                 <div class="sm:hidden">
-                    <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
+                    <button [matMenuTriggerFor]="actionsMenu" mat-icon-button >
                         <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
                     </button>
                     <mat-menu #actionsMenu="matMenu">
