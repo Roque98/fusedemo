@@ -61,6 +61,7 @@ export interface FormularioComponentesHtmlInput {
     idInput: string;
     claseInput: string;
     valorInput: string;
+    valorDateInput: Date;
     placeholderInput: string;
     requeridoInput: boolean;
     patronInput: string;
@@ -77,6 +78,7 @@ export interface FormularioComponentesHtmlInput {
     textoAyuda: string;
     etiquetaInput: string;
     iconoNombre: string;
+    hidePassword:boolean;
 }
 
 export interface NombreInputValor {

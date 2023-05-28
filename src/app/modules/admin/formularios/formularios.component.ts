@@ -11,9 +11,16 @@ import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms'
 })
 export class FormulariosComponent implements OnInit {
 
-  data: Formulario;
-  cargando = true;
+  // unsubscribe
   private _unsubscribeAll: Subject<any> = new Subject<any>();
+
+  // data from api
+  data: Formulario;
+
+  // loading
+  cargando = true;
+
+  // form group
   formGroup: FormGroup = new FormGroup({});
 
   constructor(
@@ -23,6 +30,7 @@ export class FormulariosComponent implements OnInit {
 
   ngOnInit(): void {
 
+    // get form by id
     this.activeRoute.params
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((params) => {
@@ -34,14 +42,21 @@ export class FormulariosComponent implements OnInit {
               this.formGroup = this.construirFormGroup(response);
               this.formGroup.clearValidators(); 
               this.cargando = false;
+              // set false to hide password input
+              this.data.grupos.forEach(grupo => {
+                grupo.componentes.forEach(input => {
+                    input.hidePassword = true;
+                });
               console.log(this.data);
               console.log(this.formGroup);
             });
+          });
         }
       });
 
 
   }
+
 
   getFormValues(): NombreInputValor[] {
     const obj: NombreInputValor[] = [];
@@ -56,7 +71,20 @@ export class FormulariosComponent implements OnInit {
   }
 
   enviarFormuario(): void {
-    console.log(this.formGroup.value);
+
+    // Set form values
+    let formValues = this.formGroup.value;
+    
+    // if input type is date from formValues convert to string dd/mm/yyyy
+    this.data.grupos.forEach(grupo => {
+      grupo.componentes.forEach(input => {
+        if(input.tipoInput === 5){
+          formValues[input.nombrePropiedad] = input.valorDateInput.toLocaleDateString();
+        }
+      });
+    });
+
+    console.log(formValues);
   }
 
 
@@ -67,8 +95,25 @@ export class FormulariosComponent implements OnInit {
       grupo.componentes.forEach(input => {
         const attributeName = input.nombrePropiedad;
         const formControl = new FormControl();
-        
         formControl.setValue(input.valorInput);
+
+        // Set default date
+        if(input.tipoInput === 5 && input.valorInput === null){
+          input.valorDateInput = new Date();
+          formControl.setValue(input.valorDateInput);
+        }
+          
+        // Try convert string to date o set default date
+        if(input.tipoInput === 5 && input.valorInput !== null){
+          try {
+            input.valorDateInput = new Date(input.valorInput);
+            formControl.setValue(input.valorDateInput);
+          } catch (error) {
+            input.valorDateInput = new Date();
+          }
+        }
+
+        
         
         const validators:ValidatorFn[] = [];
         
@@ -82,6 +127,9 @@ export class FormulariosComponent implements OnInit {
           validators.push(Validators.pattern(input.patronInput));
         }
 
+        
+
+        // Set validators
         formControl.setValidators(validators);
 
         formGroup.addControl(attributeName, formControl);
