@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { AuthService } from 'app/core/auth/auth.service';
@@ -18,7 +18,7 @@ export class ComingSoonSplitScreenComponent implements OnInit
         type   : 'success',
         message: ''
     };
-    comingSoonForm: FormGroup;
+    comingSoonForm: UntypedFormGroup;
     showAlert: boolean = false;
 
     /**
@@ -26,7 +26,7 @@ export class ComingSoonSplitScreenComponent implements OnInit
      */
     constructor(
         private _authService: AuthService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: UntypedFormBuilder
     )
     {
     }

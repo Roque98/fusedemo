@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, Subject, takeUntil, tap } from 'rxjs';
@@ -19,7 +19,7 @@ export class ScrumboardCardDetailsComponent implements OnInit, OnDestroy
     @ViewChild('labelInput') labelInput: ElementRef<HTMLInputElement>;
     board: Board;
     card: Card;
-    cardForm: FormGroup;
+    cardForm: UntypedFormGroup;
     labels: Label[];
     filteredLabels: Label[];
 
@@ -32,7 +32,7 @@ export class ScrumboardCardDetailsComponent implements OnInit, OnDestroy
     constructor(
         public matDialogRef: MatDialogRef<ScrumboardCardDetailsComponent>,
         private _changeDetectorRef: ChangeDetectorRef,
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _scrumboardService: ScrumboardService
     )
     {

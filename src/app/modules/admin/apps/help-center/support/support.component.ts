@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { HelpCenterService } from 'app/modules/admin/apps/help-center/help-center.service';
 
@@ -14,13 +14,13 @@ export class HelpCenterSupportComponent implements OnInit
     @ViewChild('supportNgForm') supportNgForm: NgForm;
 
     alert: any;
-    supportForm: FormGroup;
+    supportForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
     constructor(
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _helpCenterService: HelpCenterService
     )
     {

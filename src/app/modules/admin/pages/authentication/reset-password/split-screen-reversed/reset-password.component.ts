@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { FuseValidators } from '@fuse/validators';
@@ -16,14 +16,14 @@ export class ResetPasswordSplitScreenReversedComponent implements OnInit
         type   : 'success',
         message: ''
     };
-    resetPasswordForm: FormGroup;
+    resetPasswordForm: UntypedFormGroup;
     showAlert: boolean = false;
 
     /**
      * Constructor
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: UntypedFormBuilder
     )
     {
     }

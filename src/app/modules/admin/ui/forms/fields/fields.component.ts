@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 
 @Component({
     selector     : 'forms-fields',
@@ -13,7 +13,7 @@ export class FormsFieldsComponent
     /**
      * Constructor
      */
-    constructor(private _formBuilder: FormBuilder)
+    constructor(private _formBuilder: UntypedFormBuilder)
     {
     }
 

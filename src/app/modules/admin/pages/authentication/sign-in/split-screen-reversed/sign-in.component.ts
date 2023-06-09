@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 import { AuthService } from 'app/core/auth/auth.service';
@@ -16,7 +16,7 @@ export class SignInSplitScreenReversedComponent implements OnInit
         type   : 'success',
         message: ''
     };
-    signInForm: FormGroup;
+    signInForm: UntypedFormGroup;
     showAlert: boolean = false;
 
     /**
@@ -24,7 +24,7 @@ export class SignInSplitScreenReversedComponent implements OnInit
      */
     constructor(
         private _authService: AuthService,
-        private _formBuilder: FormBuilder
+        private _formBuilder: UntypedFormBuilder
     )
     {
     }

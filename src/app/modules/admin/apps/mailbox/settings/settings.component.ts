@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormArray, UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { debounceTime, take } from 'rxjs';
 import { MailboxComponent } from 'app/modules/admin/apps/mailbox/mailbox.component';
 import { MailboxService } from 'app/modules/admin/apps/mailbox/mailbox.service';
@@ -16,14 +16,14 @@ export class MailboxSettingsComponent implements OnInit
     labelColors: any = labelColors;
     labelColorDefs: any = labelColorDefs;
     labels: MailLabel[];
-    labelsForm: FormGroup;
+    labelsForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
     constructor(
         public mailboxComponent: MailboxComponent,
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _mailboxService: MailboxService
     )
     {
@@ -67,7 +67,7 @@ export class MailboxSettingsComponent implements OnInit
                     });
 
                     // Add the label form group to the labels form array
-                    (this.labelsForm.get('labels') as FormArray).push(labelFormGroup);
+                    (this.labelsForm.get('labels') as UntypedFormArray).push(labelFormGroup);
                 });
             });
 
@@ -92,7 +92,7 @@ export class MailboxSettingsComponent implements OnInit
         this._mailboxService.addLabel(this.labelsForm.get('newLabel').value).subscribe((addedLabel) => {
 
             // Push the new label to the labels form array
-            (this.labelsForm.get('labels') as FormArray).push(this._formBuilder.group({
+            (this.labelsForm.get('labels') as UntypedFormArray).push(this._formBuilder.group({
                 id   : [addedLabel.id],
                 title: [addedLabel.title, Validators.required],
                 slug : [addedLabel.slug],
@@ -114,7 +114,7 @@ export class MailboxSettingsComponent implements OnInit
     deleteLabel(id: string): void
     {
         // Get the labels form array
-        const labelsFormArray = this.labelsForm.get('labels') as FormArray;
+        const labelsFormArray = this.labelsForm.get('labels') as UntypedFormArray;
 
         // Remove the label from the labels form array
         labelsFormArray.removeAt(labelsFormArray.value.findIndex(label => label.id === id));
@@ -129,7 +129,7 @@ export class MailboxSettingsComponent implements OnInit
     updateLabels(): void
     {
         // Iterate through the labels form array controls
-        (this.labelsForm.get('labels') as FormArray).controls.forEach((labelFormGroup) => {
+        (this.labelsForm.get('labels') as UntypedFormArray).controls.forEach((labelFormGroup) => {
 
             // If the label has been edited...
             if ( labelFormGroup.dirty )

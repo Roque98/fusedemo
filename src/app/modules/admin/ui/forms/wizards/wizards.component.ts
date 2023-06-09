@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
     selector     : 'forms-wizards',
@@ -8,13 +8,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FormsWizardsComponent implements OnInit
 {
-    horizontalStepperForm: FormGroup;
-    verticalStepperForm: FormGroup;
+    horizontalStepperForm: UntypedFormGroup;
+    verticalStepperForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
-    constructor(private _formBuilder: FormBuilder)
+    constructor(private _formBuilder: UntypedFormBuilder)
     {
     }
 

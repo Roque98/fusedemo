@@ -3,7 +3,7 @@ import { FormulariosService } from './formularios.service';
 import { Formulario, NombreInputValor } from './formularios.type';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-formularios',
@@ -21,7 +21,7 @@ export class FormulariosComponent implements OnInit {
   cargando = true;
 
   // form group
-  formGroup: FormGroup = new FormGroup({});
+  formGroup: UntypedFormGroup = new UntypedFormGroup({});
 
   constructor(
     private formulariosService: FormulariosService,
@@ -88,13 +88,13 @@ export class FormulariosComponent implements OnInit {
   }
 
 
-  construirFormGroup(formulario: Formulario): FormGroup {
-    const formGroup = new FormGroup({});
+  construirFormGroup(formulario: Formulario): UntypedFormGroup {
+    const formGroup = new UntypedFormGroup({});
     
     formulario.grupos.forEach(grupo => {
       grupo.componentes.forEach(input => {
         const attributeName = input.nombrePropiedad;
-        const formControl = new FormControl();
+        const formControl = new UntypedFormControl();
         formControl.setValue(input.valorInput);
 
         // Set default date

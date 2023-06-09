@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
@@ -17,7 +17,7 @@ import { Board, Card, List } from 'app/modules/admin/apps/scrumboard/scrumboard.
 export class ScrumboardBoardComponent implements OnInit, OnDestroy
 {
     board: Board;
-    listTitleForm: FormGroup;
+    listTitleForm: UntypedFormGroup;
 
     // Private
     private readonly _positionStep: number = 65536;
@@ -30,7 +30,7 @@ export class ScrumboardBoardComponent implements OnInit, OnDestroy
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _fuseConfirmationService: FuseConfirmationService,
         private _scrumboardService: ScrumboardService
     )

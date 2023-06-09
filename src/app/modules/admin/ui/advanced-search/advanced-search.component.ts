@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Subject, takeUntil } from 'rxjs';
@@ -12,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 })
 export class AdvancedSearchComponent implements OnInit, OnDestroy
 {
-    searchForm: FormGroup;
+    searchForm: UntypedFormGroup;
     searchFormDefaults: any = {
         keywords  : '',
         type      : 'any',
@@ -28,7 +28,7 @@ export class AdvancedSearchComponent implements OnInit, OnDestroy
      */
     constructor(
         private _activatedRoute: ActivatedRoute,
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _router: Router
     )
     {

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -9,7 +9,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class MailboxComposeComponent implements OnInit
 {
-    composeForm: FormGroup;
+    composeForm: UntypedFormGroup;
     copyFields: { cc: boolean; bcc: boolean } = {
         cc : false,
         bcc: false
@@ -27,7 +27,7 @@ export class MailboxComposeComponent implements OnInit
      */
     constructor(
         public matDialogRef: MatDialogRef<MailboxComposeComponent>,
-        private _formBuilder: FormBuilder
+        private _formBuilder: UntypedFormBuilder
     )
     {
     }

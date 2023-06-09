@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { FuseConfirmationService } from '@fuse/services/confirmation';
 
 @Component({
@@ -10,13 +10,13 @@ import { FuseConfirmationService } from '@fuse/services/confirmation';
 })
 export class ConfirmationDialogComponent implements OnInit
 {
-    configForm: FormGroup;
+    configForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
     constructor(
-        private _formBuilder: FormBuilder,
+        private _formBuilder: UntypedFormBuilder,
         private _fuseConfirmationService: FuseConfirmationService
     )
     {

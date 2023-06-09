@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, NgForm, Validators } from '@angular/forms';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseAlertType } from '@fuse/components/alert';
 
@@ -19,13 +19,13 @@ export class UnlockSessionClassicComponent implements OnInit
     };
     name: string = 'Brian Hughes';
     showAlert: boolean = false;
-    unlockSessionForm: FormGroup;
+    unlockSessionForm: UntypedFormGroup;
 
     /**
      * Constructor
      */
     constructor(
-        private _formBuilder: FormBuilder
+        private _formBuilder: UntypedFormBuilder
     )
     {
     }
