@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MatSliderChange } from '@angular/material/slider';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatLegacySliderChange as MatSliderChange } from '@angular/material/legacy-slider';
+import { MatLegacySlideToggleChange as MatSlideToggleChange } from '@angular/material/legacy-slide-toggle';
 import { finalize } from 'rxjs';
 import { FuseLoadingService } from '@fuse/services/loading';
 import { FuseComponentsComponent } from 'app/modules/admin/ui/fuse-components/fuse-components.component';

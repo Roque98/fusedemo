@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
 import { debounceTime, map, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { NotesService } from 'app/modules/admin/apps/notes/notes.service';
 import { Label, Note, Task } from 'app/modules/admin/apps/notes/notes.types';
