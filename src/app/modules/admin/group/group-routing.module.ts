@@ -7,9 +7,9 @@ const routes: Routes =  [
   {
       path     : '',
       component: GroupComponent,
-      resolve  : {
-          categories: GroupResolver
-      },
+      // resolve  : {
+      //     categories: GroupResolver
+      // },
   }
 ];
 
