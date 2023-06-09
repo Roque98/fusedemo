@@ -99,14 +99,15 @@
                                 </div>
                             </div>
                         </div>
-                        <button style="grid-column: 1/3;" class="hidden sm:inline-flex" color="primary" type="submit"
-                            (click)="enviarFormulario()" mat-flat-button [disabled]="getFormInvalid()">
-                            <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
-                            <span class="ml-2">Enviar formulario</span>
-                        </button>
                         <!-- separador -->
                         <hr style="grid-column: 1/3;" *ngIf="i !== data.grupos.length - 1">
                     </div>
+
+                    <button style="grid-column: 1/3;" class="hidden sm:inline-flex w-full" color="primary" type="submit"
+                        (click)="enviarFormulario()" mat-flat-button [disabled]="getFormInvalid()">
+                        <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
+                        <span class="ml-2">Enviar formulario</span>
+                    </button>
                     <!-- <div class="flex">
                         
                     </div> -->
