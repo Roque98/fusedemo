@@ -1,4 +1,4 @@
-<form class="flex flex-col flex-auto w-full" [formGroup]="formGroup" (ngSubmit)="enviarFormuario()" *ngIf="!cargando">
+<form class="flex flex-col flex-auto w-full" [formGroup]="formGroup" (ngSubmit)="enviarFormulario()" *ngIf="!cargando">
 
     <div class="flex flex-wrap w-full max-w-screen-xl mx-auto p-6 md:p-8">
         <!-- Title and action buttons -->
@@ -104,7 +104,7 @@
                     </div>
 
                     <button style="grid-column: 1/3;" class="hidden sm:inline-flex w-full" color="primary" type="submit"
-                        (click)="enviarFormulario()" mat-flat-button [disabled]="getFormInvalid()">
+                         mat-flat-button [disabled]="getFormInvalid()">
                         <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
                         <span class="ml-2">Enviar formulario</span>
                     </button>

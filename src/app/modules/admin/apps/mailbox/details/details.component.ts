@@ -2,7 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, TemplateRef, ViewChild, ViewC
 import { ActivatedRoute, Router } from '@angular/router';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { MatLegacyButton as MatButton } from '@angular/material/legacy-button';
+import { MatButton } from '@angular/material/button';
 import { Subject, takeUntil } from 'rxjs';
 import { MailboxService } from 'app/modules/admin/apps/mailbox/mailbox.service';
 import { Mail, MailFolder, MailLabel } from 'app/modules/admin/apps/mailbox/mailbox.types';

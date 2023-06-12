@@ -45,6 +45,8 @@ export class FinanceComponent implements OnInit, AfterViewInit, OnDestroy
                 // Store the data
                 this.data = data;
 
+                console.log(this.data)
+
                 // Store the table data
                 this.recentTransactionsDataSource.data = data.recentTransactions;
 

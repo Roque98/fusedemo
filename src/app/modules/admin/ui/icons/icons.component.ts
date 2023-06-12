@@ -4,12 +4,11 @@ import { IconsService } from 'app/modules/admin/ui/icons/icons.service';
 import { Icon } from 'app/modules/admin/ui/icons/icons.types';
 
 @Component({
-    selector     : 'icons',
-    templateUrl  : './icons.component.html',
+    selector: 'icons',
+    templateUrl: './icons.component.html',
     encapsulation: ViewEncapsulation.None
 })
-export class IconsComponent implements OnInit, OnDestroy
-{
+export class IconsComponent implements OnInit, OnDestroy {
     icons$: Observable<Icon>;
     filteredIcons$: Observable<Icon>;
     filterValue$: BehaviorSubject<string> = new BehaviorSubject('');
@@ -21,8 +20,8 @@ export class IconsComponent implements OnInit, OnDestroy
     /**
      * Constructor
      */
-    constructor(private _iconsService: IconsService)
-    {
+    constructor(private _iconsService: IconsService) {
+
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -32,46 +31,49 @@ export class IconsComponent implements OnInit, OnDestroy
     /**
      * On init
      */
-    ngOnInit(): void
-    {
-        // Get the icons
-        this.icons$ = this._iconsService.icons;
+    ngOnInit(): void {
+        this._iconsService.getIcons('/ui/icons/material-twotone').subscribe({
+            next: () => {
+                // Get the icons
+                this.icons$ = this._iconsService.icons;
 
-        // Subscribe to icons
-        this._iconsService.icons
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((icons) => {
+                // Subscribe to icons
+                this._iconsService.icons
+                    .pipe(takeUntil(this._unsubscribeAll))
+                    .subscribe((icons) => {
 
-                // Set the icon size in case the icon set
-                // has a special base grid size
-                this.iconSize = icons.grid;
+                        // Set the icon size in case the icon set
+                        // has a special base grid size
+                        this.iconSize = icons.grid;
 
-                // Select the first icon
-                this.selectedIcon = [icons.namespace, icons.list[0]];
-            });
+                        // Select the first icon
+                        this.selectedIcon = [icons.namespace, icons.list[0]];
+                    });
 
-        // Create filtered icons
-        this.filteredIcons$ = combineLatest([this.icons$, this.filterValue$])
-            .pipe(
-                map(([icons, filterValue]) => {
+                // Create filtered icons
+                this.filteredIcons$ = combineLatest([this.icons$, this.filterValue$])
+                    .pipe(
+                        map(([icons, filterValue]) => {
 
-                    // Filter the icons
-                    const filteredIcons = icons.list.filter(icon => icon.toLowerCase().includes(filterValue.toLowerCase()));
+                            // Filter the icons
+                            const filteredIcons = icons.list.filter(icon => icon.toLowerCase().includes(filterValue.toLowerCase()));
 
-                    // Update the list with the filtered icons
-                    return {
-                        ...icons,
-                        list: filteredIcons
-                    };
-                })
-            );
+                            // Update the list with the filtered icons
+                            return {
+                                ...icons,
+                                list: filteredIcons
+                            };
+                        })
+                    );
+            }
+        });
+
     }
 
     /**
      * On destroy
      */
-    ngOnDestroy(): void
-    {
+    ngOnDestroy(): void {
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next(null);
         this._unsubscribeAll.complete();
@@ -86,8 +88,7 @@ export class IconsComponent implements OnInit, OnDestroy
      *
      * @param event
      */
-    filterIcons(event: any): void
-    {
+    filterIcons(event: any): void {
         // Push the value to the observable
         this.filterValue$.next(event.target.value);
     }
@@ -98,8 +99,7 @@ export class IconsComponent implements OnInit, OnDestroy
      * @param namespace
      * @param icon
      */
-    selectIcon(namespace: string, icon: string): void
-    {
+    selectIcon(namespace: string, icon: string): void {
         this.selectedIcon = [
             namespace,
             icon
@@ -110,15 +110,12 @@ export class IconsComponent implements OnInit, OnDestroy
      * Returns the selected icon's svgIcon
      * to use in mat-icon component
      */
-    calcSvgIconAttr(): string
-    {
-        if ( !this.selectedIcon )
-        {
+    calcSvgIconAttr(): string {
+        if (!this.selectedIcon) {
             return '';
         }
 
-        if ( this.selectedIcon[0] === '' )
-        {
+        if (this.selectedIcon[0] === '') {
             return this.selectedIcon[1];
         }
 

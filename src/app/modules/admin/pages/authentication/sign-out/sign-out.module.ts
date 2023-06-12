@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'app/shared/shared.module';
 import { SignOutClassicComponent } from 'app/modules/admin/pages/authentication/sign-out/classic/sign-out.component';
 import { SignOutModernComponent } from 'app/modules/admin/pages/authentication/sign-out/modern/sign-out.component';

@@ -87,6 +87,14 @@ export const appRoutes: Route[] = [
                 path: 'formulario/:id',
                 loadChildren: () => import('app/modules/admin/formularios/formularios.module').then(m => m.FormulariosModule)
             },
+            {
+                path: 'pagina/:id',
+                loadChildren: () => import('app/modules/admin/pagina/pagina.module').then(m => m.PaginaModule)
+            },
+            {
+                path: 'tabla/:id',
+                loadChildren: () => import('app/modules/admin/tablas/tablas.module').then(m => m.TablasModule)
+            },
             // Dashboards
             {
                 path: 'dashboards', children: [

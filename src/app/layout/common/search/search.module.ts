@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { BlockScrollStrategy, Overlay } from '@angular/cdk/overlay';
 import { MAT_LEGACY_AUTOCOMPLETE_SCROLL_STRATEGY as MAT_AUTOCOMPLETE_SCROLL_STRATEGY, MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
 import { MatButtonModule } from '@angular/material/button';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from 'app/shared/shared.module';
 import { SearchComponent } from 'app/layout/common/search/search.component';
 

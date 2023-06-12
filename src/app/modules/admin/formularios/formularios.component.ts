@@ -17,6 +17,9 @@ export class FormulariosComponent implements OnInit {
   // data from api
   data: Formulario;
 
+  // idFormulario
+  idFormulario: string;
+
   // loading
   cargando = true;
 
@@ -35,22 +38,25 @@ export class FormulariosComponent implements OnInit {
       .pipe(takeUntil(this._unsubscribeAll))
       .subscribe((params) => {
         if (params.id) {
+
+          this.idFormulario = params.id;
+
           this.formulariosService.getFormById(params.id)
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe((response) => {
               this.data = response;
               this.formGroup = this.construirFormGroup(response);
-              this.formGroup.clearValidators(); 
+              this.formGroup.clearValidators();
               this.cargando = false;
               // set false to hide password input
               this.data.grupos.forEach(grupo => {
                 grupo.componentes.forEach(input => {
-                    input.hidePassword = true;
+                  input.hidePassword = true;
                 });
-              console.log(this.data);
-              console.log(this.formGroup);
+                console.log('Datos de la bd', this.data);
+                console.log('Datos del formgroup', this.formGroup);
+              });
             });
-          });
         }
       });
 
@@ -70,27 +76,41 @@ export class FormulariosComponent implements OnInit {
     return obj;
   }
 
-  enviarFormuario(): void {
+  enviarFormulario(): void {
 
     // Set form values
     let formValues = this.formGroup.value;
-    
+
     // if input type is date from formValues convert to string dd/mm/yyyy
     this.data.grupos.forEach(grupo => {
       grupo.componentes.forEach(input => {
-        if(input.tipoInput === 5){
+        if (input.tipoInput === 5) {
           formValues[input.nombrePropiedad] = input.valorDateInput.toLocaleDateString();
         }
       });
     });
 
-    console.log(formValues);
+    console.log('Json que se enviara al back', formValues);
+
+    this.formulariosService.enviarJsonDelFormulario(this.idFormulario, formValues)
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe({
+        next: (response)=>{
+          console.log('Exito', response)
+        }, 
+        error: (err)=>{
+          console.log('Error' ,err)
+        },
+        complete: ()=>{
+
+        }
+      })
   }
 
 
   construirFormGroup(formulario: Formulario): UntypedFormGroup {
     const formGroup = new UntypedFormGroup({});
-    
+
     formulario.grupos.forEach(grupo => {
       grupo.componentes.forEach(input => {
         const attributeName = input.nombrePropiedad;
@@ -98,13 +118,13 @@ export class FormulariosComponent implements OnInit {
         formControl.setValue(input.valorInput);
 
         // Set default date
-        if(input.tipoInput === 5 && input.valorInput === null){
+        if (input.tipoInput === 5 && input.valorInput === null) {
           input.valorDateInput = new Date();
           formControl.setValue(input.valorDateInput);
         }
-          
+
         // Try convert string to date o set default date
-        if(input.tipoInput === 5 && input.valorInput !== null){
+        if (input.tipoInput === 5 && input.valorInput !== null) {
           try {
             input.valorDateInput = new Date(input.valorInput);
             formControl.setValue(input.valorDateInput);
@@ -113,21 +133,21 @@ export class FormulariosComponent implements OnInit {
           }
         }
 
-        
-        
-        const validators:ValidatorFn[] = [];
-        
+
+
+        const validators: ValidatorFn[] = [];
+
         // Validacion input requerido
-        if(input.requeridoInput){
+        if (input.requeridoInput) {
           validators.push(Validators.required);
         }
 
         // Validacion pattern
-        if(input.patronInput){
+        if (input.patronInput) {
           validators.push(Validators.pattern(input.patronInput));
         }
 
-        
+
 
         // Set validators
         formControl.setValidators(validators);

@@ -1,0 +1,44 @@
+<div class="w-full max-w-screen-xl mx-auto p-6 md:p-8">
+    <!-- Title and action buttons -->
+    <div class="flex items-center justify-between w-full h-min pb-3 pt-3">
+        <div>
+            <div class="text-3xl font-semibold tracking-tight leading-8">Subtitulo</div>
+            <div class="font-medium tracking-tight text-secondary">Titulo</div>
+        </div>
+        <div class="flex items-center ml-6">
+            <button class="hidden sm:inline-flex" mat-stroked-button>
+                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
+                <span class="ml-2">Regresar</span>
+            </button>
+
+
+            <!-- Actions menu (visible on xs) -->
+            <div class="sm:hidden">
+                <button [matMenuTriggerFor]="actionsMenu" mat-icon-button>
+                    <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
+                </button>
+                <mat-menu #actionsMenu="matMenu">
+                    <button mat-menu-item>Regresar</button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="grid grid-cols-1  w-full">
+        <div class="text-5xl">Texto h1</div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="text-4xl">Texto h2</div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="text-3xl">Texto h3</div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="text-2xl">Texto h4</div>
+    </div>
+    <div class="grid grid-cols-1">
+        <div class="text-">Texto</div>
+    </div>
+</div> 

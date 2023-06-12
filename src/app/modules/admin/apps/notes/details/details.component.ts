@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MAT_DIALOG_DATA as MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, map, Observable, of, Subject, switchMap, takeUntil } from 'rxjs';
 import { NotesService } from 'app/modules/admin/apps/notes/notes.service';
 import { Label, Note, Task } from 'app/modules/admin/apps/notes/notes.types';
@@ -23,9 +23,9 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        @Inject(MAT_DIALOG_DATA) private _data: { note: Note },
-        private _notesService: NotesService,
-        private _matDialogRef: MatDialogRef<NotesDetailsComponent>
+        // @Inject(MAT_DIALOG_DATA) private _data: { note: Note },
+        // private _notesService: NotesService,
+        // private _matDialogRef: MatDialogRef<NotesDetailsComponent>
     )
     {
     }
@@ -39,49 +39,49 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // Edit
-        if ( this._data.note.id )
-        {
-            // Request the data from the server
-            this._notesService.getNoteById(this._data.note.id).subscribe();
+    //     // Edit
+    //     if ( this._data.note.id )
+    //     {
+    //         // Request the data from the server
+    //         this._notesService.getNoteById(this._data.note.id).subscribe();
 
-            // Get the note
-            this.note$ = this._notesService.note$;
-        }
-        // Add
-        else
-        {
-            // Create an empty note
-            const note = {
-                id       : null,
-                title    : '',
-                content  : '',
-                tasks    : null,
-                image    : null,
-                reminder : null,
-                labels   : [],
-                archived : false,
-                createdAt: null,
-                updatedAt: null
-            };
+    //         // Get the note
+    //         this.note$ = this._notesService.note$;
+    //     }
+    //     // Add
+    //     else
+    //     {
+    //         // Create an empty note
+    //         const note = {
+    //             id       : null,
+    //             title    : '',
+    //             content  : '',
+    //             tasks    : null,
+    //             image    : null,
+    //             reminder : null,
+    //             labels   : [],
+    //             archived : false,
+    //             createdAt: null,
+    //             updatedAt: null
+    //         };
 
-            this.note$ = of(note);
-        }
+    //         this.note$ = of(note);
+    //     }
 
-        // Get the labels
-        this.labels$ = this._notesService.labels$;
+    //     // Get the labels
+    //     this.labels$ = this._notesService.labels$;
 
-        // Subscribe to note updates
-        this.noteChanged
-            .pipe(
-                takeUntil(this._unsubscribeAll),
-                debounceTime(500),
-                switchMap(note => this._notesService.updateNote(note)))
-            .subscribe(() => {
+    //     // Subscribe to note updates
+    //     this.noteChanged
+    //         .pipe(
+    //             takeUntil(this._unsubscribeAll),
+    //             debounceTime(500),
+    //             switchMap(note => this._notesService.updateNote(note)))
+    //         .subscribe(() => {
 
-                // Mark for check
-                this._changeDetectorRef.markForCheck();
-            });
+    //             // Mark for check
+    //             this._changeDetectorRef.markForCheck();
+    //         });
     }
 
     /**
@@ -105,11 +105,11 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
      */
     createNote(note: Note): void
     {
-        this._notesService.createNote(note).pipe(
-            map(() => {
-                // Get the note
-                this.note$ = this._notesService.note$;
-            })).subscribe();
+        // this._notesService.createNote(note).pipe(
+        //     map(() => {
+        //         // Get the note
+        //         this.note$ = this._notesService.note$;
+        //     })).subscribe();
     }
 
     /**
@@ -185,7 +185,7 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
         }
 
         // Add the task
-        this._notesService.addTask(note, task).subscribe();
+        // this._notesService.addTask(note, task).subscribe();
     }
 
     /**
@@ -266,7 +266,7 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
         this.noteChanged.next(note);
 
         // Close the dialog
-        this._matDialogRef.close();
+        // this._matDialogRef.close();
     }
 
     /**
@@ -286,18 +286,18 @@ export class NotesDetailsComponent implements OnInit, OnDestroy
      */
     deleteNote(note: Note): void
     {
-        this._notesService.deleteNote(note)
-            .subscribe((isDeleted) => {
+        // this._notesService.deleteNote(note)
+        //     .subscribe((isDeleted) => {
 
-                // Return if the note wasn't deleted...
-                if ( !isDeleted )
-                {
-                    return;
-                }
+        //         // Return if the note wasn't deleted...
+        //         if ( !isDeleted )
+        //         {
+        //             return;
+        //         }
 
-                // Close the dialog
-                this._matDialogRef.close();
-            });
+        //         // Close the dialog
+        //         this._matDialogRef.close();
+        //     });
     }
 
     /**

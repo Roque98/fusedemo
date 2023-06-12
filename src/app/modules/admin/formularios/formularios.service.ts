@@ -48,4 +48,11 @@ export class FormulariosService {
       })
     );
   }
+
+  /**
+   * 
+   */
+  enviarJsonDelFormulario(idFormulario: string, json: any){
+    return this.Http.post(`${this.apiUrl}/Formulario/${idFormulario}`, json)
+  }
 }
