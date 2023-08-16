@@ -1,0 +1,7 @@
+<h2 mat-dialog-title>{{ data.tituloModal }}</h2>
+<mat-dialog-content>{{ data.descripcionModal }}</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="true">{{ data.textoConfirmar }}</button>
+    <button mat-button mat-dialog-close>{{ data.textoCancelar }}</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+</mat-dialog-actions>

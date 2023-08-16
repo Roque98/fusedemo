@@ -2,8 +2,10 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { TablasService } from './Tablas.service';
-import { ActivatedRoute } from '@angular/router';
-import { IColumna, ITabla, ITablaAccion } from './tablas.dto';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IColumna, ITabla, ITablaAcciones } from './tablas.dto';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogsComponent } from './modal-dialogs/modal-dialogs.component';
 
 @Component({
   selector: 'app-tablas',
@@ -25,7 +27,9 @@ export class TablasComponent implements OnInit, AfterViewInit {
 
   constructor(
     private _tablasService: TablasService,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    public dialog: MatDialog,
+    private _router: Router
   ) {
 
   }
@@ -108,25 +112,31 @@ export class TablasComponent implements OnInit, AfterViewInit {
   private _getTableById(id: string): void {
     this._tablasService.getTablaBydId(id).subscribe(
       (response) => {
+        console.log(response);
         this.tabla = response;
         this.tableData.data = response.datos;
         this.tableColumns = this._getArrayNameColumns(response.columnas);
         this.tableColumns.push('acciones');
-        this.tableData.data.forEach(
-          (element) => {
-            element.acciones = this.tabla.acciones.map(
-              (accion) => {
-                return {
-                  nombre: accion.nombreAccion,
-                  icono: accion.icono,
-                  ruta: accion.urlAccion + '/' + element.id
-                }
-              }
-            ).filter(accion => accion.nombre.toLocaleLowerCase() != 'crear')
-          }
-        );
-        console.log(this.tableData.data);
-        console.log(this.tabla)
+        // this.tableData.data.forEach(
+        //   (element) => {
+        //     element.acciones = this.tabla.accionesPorRegistro.map(
+        //       (accion) => {
+        //         if(!accion.ejecutarSp){ 
+        //           return {
+                  
+        //             ...accion,
+        //             urlAccion: accion.urlAccion + '/' + element.id,
+  
+        //           }
+        //         } else {
+        //           return {
+        //             ...accion,
+        //            }
+        //         }
+        //       }
+        //     )
+        //   }
+        // );
       },
       (error) => {
         console.log(error);
@@ -173,10 +183,72 @@ export class TablasComponent implements OnInit, AfterViewInit {
 
   }
 
+  /**
+   * Open dialog
+   * @returns void
+   */
+
+  openDialog(accion: ITablaAcciones, data: any) {
+    const dialogRef = this.dialog.open(ModalDialogsComponent, {
+      data: accion.modal
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if(result){
+        if(accion.ejecutarSp){
+          this._tablasService.executeSpAccion(accion, data).subscribe({
+            next: (response) => {
+              if(accion.urlAccion){
+                this._router.navigate([accion.urlAccion]);
+              } else {
+                // Recargar tabla
+                this._getTableById(this._getIdFromRoute());
+              }
+            },
+            error: (error) => {
+              console.log(error);
+            },
+            complete: () => {
+              console.log('complete');
+            }
+          });
+        } else {
+          this._router.navigate([accion.urlAccion]);
+        }
+      } else {
+        console.log('cancel');
+      }
+    });
+  }
+
+
+  /**
+   * Procesar click en boton de accion
+   */
+  procesarClickAccion(accion: ITablaAcciones, row: any): void {
+
+    if (accion.abrirModal) {
+      this.openDialog( accion, this.eliminarPropiedadAcciones(row));
+    } else {
+      // redireccionar a la url
+      this._router.navigate([accion.urlAccion]);
+    }
+  }
+
   /*
-   * Get Crear accion 
-  */  
-  getCrearAccion(): string {
-    return this.tabla.acciones.find(accion => accion.nombreAccion.toLocaleLowerCase() == 'crear').urlAccion;
+  * Elimina la propiedad acciones del objeto
+  */
+  eliminarPropiedadAcciones(objeto: any): any {
+    const { acciones, ...rest } = objeto;
+    return rest;
+  }
+
+
+  getDatosPorColumna(row) {
+    return {
+      idTabla: this.tabla.id,
+      datos: row
+    };
   }
 }

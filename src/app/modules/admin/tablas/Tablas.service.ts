@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
-import { ITabla } from './tablas.dto';
+import { ITabla, ITablaAcciones } from './tablas.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,4 +18,9 @@ export class TablasService {
     return this.httpClient.get<ITabla>(`${this.apiUrl}/tablas/${id}`);
   }
 
+  executeSpAccion(accion: ITablaAcciones, body: any) {
+    console.log('body', body);
+    
+    return this.httpClient.post(`${this.apiUrl}/tablas/${accion.id}/execute`, body);
+  }
 }

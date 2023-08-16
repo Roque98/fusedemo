@@ -88,6 +88,10 @@ export const appRoutes: Route[] = [
                 loadChildren: () => import('app/modules/admin/formularios/formularios.module').then(m => m.FormulariosModule)
             },
             {
+                path: 'formulario/:id/:idRegistro',
+                loadChildren: () => import('app/modules/admin/formularios/formularios.module').then(m => m.FormulariosModule)
+            },
+            {
                 path: 'pagina/:id',
                 loadChildren: () => import('app/modules/admin/pagina/pagina.module').then(m => m.PaginaModule)
             },

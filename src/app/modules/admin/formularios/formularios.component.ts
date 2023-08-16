@@ -4,6 +4,7 @@ import { Formulario, NombreInputValor } from './formularios.type';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AccionService } from './Accion.service';
 
 @Component({
   selector: 'app-formularios',
@@ -29,39 +30,36 @@ export class FormulariosComponent implements OnInit {
   constructor(
     private formulariosService: FormulariosService,
     private activeRoute: ActivatedRoute,
+    private accionService: AccionService
   ) { }
 
   ngOnInit(): void {
-
-    // get form by id
+    // Get form by id
     this.activeRoute.params
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe((params) => {
-        if (params.id) {
+        .pipe(takeUntil(this._unsubscribeAll))
+        .subscribe((params) => {
+          if (params.id) {
+            this.idFormulario = params.id;
 
-          this.idFormulario = params.id;
-
-          this.formulariosService.getFormById(params.id)
-            .pipe(takeUntil(this._unsubscribeAll))
-            .subscribe((response) => {
-              this.data = response;
-              this.formGroup = this.construirFormGroup(response);
-              this.formGroup.clearValidators();
-              this.cargando = false;
-              // set false to hide password input
-              this.data.grupos.forEach(grupo => {
-                grupo.componentes.forEach(input => {
-                  input.hidePassword = true;
+            this.formulariosService.getFormById(params.id)
+              .pipe(takeUntil(this._unsubscribeAll))
+              .subscribe((response) => {
+                this.data = response.data as Formulario;
+                this.formGroup = this.construirFormGroup(this.data);
+                this.formGroup.clearValidators();
+                this.cargando = false;
+                // set false to hide password input
+                this.data.grupos.forEach(grupo => {
+                  grupo.componentes.forEach(input => {
+                    input.hidePassword = true;
+                  });
                 });
-                console.log('Datos de la bd', this.data);
-                console.log('Datos del formgroup', this.formGroup);
               });
-            });
-        }
-      });
-
-
+          }
+        });
   }
+
+
 
 
   getFormValues(): NombreInputValor[] {
@@ -89,8 +87,6 @@ export class FormulariosComponent implements OnInit {
         }
       });
     });
-
-    console.log('Json que se enviara al back', formValues);
 
     this.formulariosService.enviarJsonDelFormulario(this.idFormulario, formValues)
       .pipe(takeUntil(this._unsubscribeAll))
@@ -203,4 +199,7 @@ export class FormulariosComponent implements OnInit {
     const input = componentes.find(componente => componente.find(input => input.nombrePropiedad === nombrePropiedad));
     return input[0].mensajeErrorPatrinInput || '';
   }
+
+  
+  
 }

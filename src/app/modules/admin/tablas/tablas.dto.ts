@@ -1,54 +1,52 @@
-/*
-{
-  "id": 1,
-  "titulo": "Empleados",
-  "subtitulo": "Lista de todos los empleados",
-  "spObtenerDatos": "BasesPruebaCrud..Empleado_ListarTodosLosEmpleados",
-  "columnas": [
-    {
-      "id": 1,
-      "nombreColumna": "id",
-      "aliasColumna": "Numero identificado del usuario",
-      "idTabla": 1
-    },
-    {
-      "id": 2,
-      "nombreColumna": "FirstName",
-      "aliasColumna": "Nombres del empleado",
-      "idTabla": 1
-    },
-    {
-      "id": 3,
-      "nombreColumna": "LastName",
-      "aliasColumna": "Apellido del empleado",
-      "idTabla": 1
-    }
-  ]
-}
-*/
+import { Boton } from "../../../shared/boton/Boton.type";
+
 
 
 export interface ITabla {
-    id: number;
-    titulo: string;
-    subtitulo: string;
-    columnas: IColumna[];
-    acciones: ITablaAccion[];
-    datos: any[];
+  id: number;
+  titulo: string;
+  subtitulo: string;
+  columnas: IColumna[];
+  accionesPorRegistro: ITablaAcciones[];
+  accionesPorTabla: ITablaAcciones[];
+  botonesAccionesPorTabla: IBotonRelacion[];
+  botonesAccionesPorColumna: IBotonRelacion[];
+  datos: any[];
+}
+
+export interface IBotonRelacion {
+  botonId: number;
+  tablaId: number;
+  boton: Boton;
 }
 
 export interface IColumna {
-    id: number;
-    nombreColumna: string;
-    aliasColumna: string;
-    idTabla: number;
+  id: number;
+  nombreColumna: string;
+  aliasColumna: string;
+  idTabla: number;
 }
 
 
-export interface ITablaAccion {
-    id: number;
-    icono: string;
-    nombreAccion: string;
-    urlAccion: string;
-    idTabla: number;
+export interface ITablaAcciones {
+  id: number;
+  icono: string;
+  nombreAccion: string;
+  urlAccion: string;
+  idTabla: number;
+  orden: number;
+  abrirModal: boolean;
+  idModal: number;
+  modal: IModal;
+  ejecutarSp: boolean;
+  accionPorCadaRegistro: boolean;
+}
+
+
+export interface IModal {
+  id: number;
+  tituloModal: string;
+  descripcionModal: string;
+  textoConfirmar: string;
+  textoCancelar: string;
 }

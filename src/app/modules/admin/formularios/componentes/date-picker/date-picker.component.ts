@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormularioComponentesHtmlInput } from '../../formularios.type';
+import { FormularioComponentesHtmlInput } from 'app/modules/admin/FormularioComponentesHtmlInput/FormularioComponentesHtmlInput.type';
 
 @Component({
   selector: 'app-date-picker',

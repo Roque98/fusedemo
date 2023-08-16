@@ -11,11 +11,15 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ModalDialogsComponent } from './modal-dialogs/modal-dialogs.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 @NgModule({
   declarations: [
-    TablasComponent
+    TablasComponent,
+    ModalDialogsComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +31,9 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatTableModule,
     MatSortModule,
     MatPaginatorModule,
-    HttpClientModule,       
+    MatDialogModule,
+    HttpClientModule,
+    SharedModule       
   ]
 })
 export class TablasModule { }

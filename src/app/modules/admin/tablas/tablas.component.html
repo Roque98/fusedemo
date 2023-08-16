@@ -6,11 +6,9 @@
             <div class="font-medium tracking-tight text-secondary">{{ tabla.subtitulo }}</div>
         </div>
         <div class="flex items-center ml-6">
-            <button class="hidden sm:inline-flex" mat-stroked-button>
-                <mat-icon class="icon-size-5" [svgIcon]="'heroicons_outline:arrow-narrow-left'"></mat-icon>
-                <span class="ml-2">Regresar</span>
-            </button>
-
+            <div *ngFor="let boton of tabla.botonesAccionesPorTabla">
+                <app-boton [boton]="boton.boton"></app-boton>
+            </div>
 
             <!-- Actions menu (visible on xs) -->
             <div class="sm:hidden">
@@ -18,7 +16,7 @@
                     <mat-icon [svgIcon]="'heroicons_outline:dots-vertical'"></mat-icon>
                 </button>
                 <mat-menu #actionsMenu="matMenu">
-                    <button mat-menu-item>Regresar</button>
+                    <!-- <button mat-menu-item *ngFor="let accionPorTabla of tabla.accionesPorTabla" [routerLink]="accionPorTabla.urlAccion">{{ accionPorTabla.nombreAccion }}</button> -->
                 </mat-menu>
             </div>
         </div>
@@ -27,14 +25,10 @@
     <div class="flex items-center justify-between w-full h-min pb-3 pt-3">
         <div class="xl:col-span-2 flex flex-col flex-auto bg-card shadow rounded-2xl overflow-hidden">
             <div class="w-full p-6 grid" style="align-items: center; grid-template-columns: 7fr 1fr; gap: 10px;">
-                <mat-form-field class="">
+                <mat-form-field class="flex items-center">
                     <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_outline:search'"></mat-icon>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Buscar" #input>
                 </mat-form-field>
-                <button class="w-full" mat-stroked-button [routerLink]="getCrearAccion()">
-                    <mat-icon class="icon-size-5" [svgIcon]="'heroicons_outline:plus'" ></mat-icon>
-                    <span class="ml-2">Nuevo registro</span>
-                </button>
             </div>
             <div class="overflow-x-auto mx-6">
                 <table class="w-full bg-transparent" mat-table matSort [dataSource]="tableData" [trackBy]="trackByFn"
@@ -50,10 +44,13 @@
                                 {{row[item]}}
                             </span>
                             <div *ngIf="item == 'acciones'">
-                                <button class="hidden sm:inline-flex" mat-stroked-button *ngFor="let button of row[item]">
+                                <div *ngFor="let boton of tabla.botonesAccionesPorColumna">
+                                    <app-boton [boton]="boton.boton" [datos]="getDatosPorColumna(row)"></app-boton>
+                                </div>
+                                <!-- <button class="hidden sm:inline-flex" mat-stroked-button *ngFor="let button of row[item]" (click)="procesarClickAccion(button, row)">
                                     <mat-icon class="icon-size-5" [svgIcon]="button.icono"></mat-icon>
-                                    <span class="ml-2">{{ button.nombre }}</span>
-                                </button>
+                                    <span class="ml-2">{{ button.nombreAccion }}</span>
+                                </button> -->
                             </div>
                         </td>
                     </ng-container>
