@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormulariosService } from './formularios.service';
-import { Formulario, NombreInputValor } from './formularios.type';
+import { Formulario } from './formularios.type';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
 import { UntypedFormControl, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { AccionService } from './Accion.service';
+import { Boton, TipoBoton } from 'app/shared/componentes/boton/Boton.type';
+import { ParametroSp } from '../AccionSpFormulario/AccionSpFormulario.type';
 
 @Component({
   selector: 'app-formularios',
@@ -26,6 +28,9 @@ export class FormulariosComponent implements OnInit {
 
   // form group
   formGroup: UntypedFormGroup = new UntypedFormGroup({});
+
+  // tipos de botones
+  BotonSubmit = TipoBoton.BotonSubmit;
 
   constructor(
     private formulariosService: FormulariosService,
@@ -59,49 +64,61 @@ export class FormulariosComponent implements OnInit {
         });
   }
 
-
-
-
-  getFormValues(): NombreInputValor[] {
-    const obj: NombreInputValor[] = [];
-
-    this.data.grupos.forEach(grupo => {
-      grupo.componentes.forEach(input => {
-        obj.push({ nombreInput: input.nombrePropiedad, valorInput: input.valorInput });
-      });
+  getBotonFormulario(boton: Boton){
+    // Agregar data del formulario a la accion de tipo 2 del boton
+    let botonWithFormData = boton.acciones.forEach(accion => {
+      if(accion.id === 2){
+        if( 'idFormulario' in accion.atributosAccion ){
+          accion.atributosAccion.dataFormulario = this.formGroup.value;
+        }
+      }
     });
 
-    return obj;
+    console.log('botonWithFormData', botonWithFormData);
+    return boton; 
   }
 
-  enviarFormulario(): void {
 
-    // Set form values
-    let formValues = this.formGroup.value;
+  // getFormValues(): ParametroSp[] {
+  //   const obj: ParametroSp[] = [];
 
-    // if input type is date from formValues convert to string dd/mm/yyyy
-    this.data.grupos.forEach(grupo => {
-      grupo.componentes.forEach(input => {
-        if (input.tipoInput === 5) {
-          formValues[input.nombrePropiedad] = input.valorDateInput.toLocaleDateString();
-        }
-      });
-    });
+  //   this.data.grupos.forEach(grupo => {
+  //     grupo.componentes.forEach(input => {
+  //       obj.push({ nombreParametro: input.nombrePropiedad, valorParametro: input.valorInput });
+  //     });
+  //   });
 
-    this.formulariosService.enviarJsonDelFormulario(this.idFormulario, formValues)
-      .pipe(takeUntil(this._unsubscribeAll))
-      .subscribe({
-        next: (response)=>{
-          console.log('Exito', response)
-        }, 
-        error: (err)=>{
-          console.log('Error' ,err)
-        },
-        complete: ()=>{
+  //   return obj;
+  // }
 
-        }
-      })
-  }
+  // enviarFormulario(): void {
+
+  //   // Set form values
+  //   let formValues = this.formGroup.value;
+
+  //   // if input type is date from formValues convert to string dd/mm/yyyy
+  //   this.data.grupos.forEach(grupo => {
+  //     grupo.componentes.forEach(input => {
+  //       if (input.tipoInput === 5) {
+  //         formValues[input.nombrePropiedad] = input.valorDateInput.toLocaleDateString();
+  //       }
+  //     });
+  //   });
+
+  //   this.formulariosService.enviarJsonDelFormulario(this.idFormulario, formValues)
+  //     .pipe(takeUntil(this._unsubscribeAll))
+  //     .subscribe({
+  //       next: (response)=>{
+  //         console.log('Exito', response)
+  //       }, 
+  //       error: (err)=>{
+  //         console.log('Error' ,err)
+  //       },
+  //       complete: ()=>{
+
+  //       }
+  //     })
+  // }
 
 
   construirFormGroup(formulario: Formulario): UntypedFormGroup {

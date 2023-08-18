@@ -1,4 +1,4 @@
-import { Boton } from "../../../shared/boton/Boton.type";
+import { Boton } from "../../../shared/componentes/boton/Boton.type";
 
 
 

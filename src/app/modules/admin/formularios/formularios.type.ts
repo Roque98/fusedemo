@@ -1,4 +1,5 @@
-import { Boton } from "../../../shared/boton/Boton.type";
+import { Boton } from "../../../shared/componentes/boton/Boton.type";
+import { ParametroSp } from "../AccionSpFormulario/AccionSpFormulario.type";
 import { FormularioGrupo } from "../formularioGrupo/formularioGrupo.type";
 
 export interface Formulario {
@@ -7,25 +8,21 @@ export interface Formulario {
     subtitulo: string;
     grupos: FormularioGrupo[];
     botones: Boton[];
+    botonSubmit: Boton;
 }
 
-export interface NombreInputValor {
-    nombreInput: string;
-    valorInput: string;
-}
+
 
 /*
 Funcion que recibe un formulario y devuelve un objeto con los valores de los inputs
 */
 
-export function getFormValuesGroup(formulario: Formulario, idGroup: number): NombreInputValor[] {
-    const obj: NombreInputValor[] = [];
+export function getParametrosFromFormulario(formulario: Formulario): ParametroSp[] {
+    const obj: ParametroSp[] = [];
     formulario.grupos.forEach(grupo => {
-        if (grupo.id === idGroup) {
-            grupo.componentes.forEach(input => {
-                obj.push({ nombreInput: input.nombrePropiedad, valorInput: input.valorInput });
-            });
-        }
+        grupo.componentes.forEach(input => {
+            obj.push({ nombreParametro: input.nombrePropiedad, valorParametro: input.valorInput });
+        });
     });
     return obj;
 }

@@ -4,6 +4,8 @@ import { forEach } from 'lodash';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Accion } from '../Accion/Accion.type';
+import { AccionSpFormularioService } from '../AccionSpFormulario/AccionSpFormulario.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +14,9 @@ export class AccionService {
 
   constructor(
     private router: Router,
-    private httpClient: HttpClient
-  ) {}
+    private httpClient: HttpClient,
+    private accionSpFormularioService: AccionSpFormularioService
+  ) { }
 
   handleAccion(acciones: Accion[], datos?: any): any {
     console.log('acciones', acciones);
@@ -30,16 +33,20 @@ export class AccionService {
     });
   }
 
-  realizarHttp(url: string, datos?: any): void {    
+  realizarHttp(url: string, datos?: any): void {
     console.log('url', url);
-    console.log('datos', datos);  
+    console.log('datos', datos);
     // return this.httpClient.post(url, datos);
   }
 
-    redirigir(accion: Accion) {
-      console.log('accion', accion);
-      if ('url' in accion.atributosAccion) {
-        this.router.navigate([accion.atributosAccion.url]);
-      }
+  redirigir(accion: Accion) {
+    console.log('accion', accion);
+    if ('url' in accion.atributosAccion) {
+      this.router.navigate([accion.atributosAccion.url]);
     }
+  }
+
+  ejecutarSpFormulario(accion: Accion){
+    this.accionSpFormularioService.ejecutarSpFormulario(accion);
+  }
 }

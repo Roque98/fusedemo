@@ -1,0 +1,16 @@
+<button class="hidden sm:inline-flex" mat-stroked-button (click)="handleAccion()" *ngIf="tipoBoton == botonHeader">
+  <mat-icon class="icon-size-5" [svgIcon]="boton.icono"></mat-icon>
+  <span class="ml-2">{{ boton.texto }}</span>
+</button>
+
+
+<button style="grid-column: 1/3;" (click)="handleAccion()" class="hidden sm:inline-flex w-full" color="primary" *ngIf="tipoBoton == botonSubmit" mat-flat-button>
+  <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
+  <span class="ml-2">Enviar formulario</span>
+</button>
+
+<!-- <button style="grid-column: 1/3;" class="hidden sm:inline-flex w-full" color="primary" type="submit" mat-flat-button
+  [disabled]="getFormInvalid()" (click)="enviarFormulario()">
+  <mat-icon svgIcon="heroicons_outline:arrow-circle-right"></mat-icon>
+  <span class="ml-2">Enviar formulario</span>
+</button> -->

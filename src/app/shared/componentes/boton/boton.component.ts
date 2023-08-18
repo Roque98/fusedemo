@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Boton } from 'app/shared/boton/Boton.type';
+import { Boton, TipoBoton } from 'app/shared/componentes/boton/Boton.type';
 import { AccionService } from 'app/modules/admin/formularios/Accion.service';
 import { forEach } from 'lodash';
 
@@ -11,7 +11,10 @@ import { forEach } from 'lodash';
 export class BotonComponent implements OnInit {
 
   @Input() boton: Boton;
-  // @Input() datos: any;
+  @Input() tipoBoton: TipoBoton= TipoBoton.BotonHeader;
+  
+  botonHeader = TipoBoton.BotonHeader;
+  botonSubmit = TipoBoton.BotonSubmit;
 
   constructor(
     public accionService: AccionService
@@ -28,7 +31,10 @@ export class BotonComponent implements OnInit {
         case 1:
           this.accionService.redirigir(accion);
           break;
+        case 2:
+          this.accionService.ejecutarSpFormulario(accion);
         default:
+          
           break;
       }
 
